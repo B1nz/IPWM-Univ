@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Fakultas;
+use App\Jurusan;
+use App\Ruangan;
 
-class FakultasController extends Controller
+class RuanganController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +17,11 @@ class FakultasController extends Controller
     {
         //pagination
         // numbering
-        $data = Fakultas::when($request->search, function ($query) use ($request) {
+        $data = Ruangan::when($request->search, function ($query) use ($request) {
             $query->where('name', 'LIKE', '%' . $request->search . '%');
         })->paginate(5);
 
-        return view('fakultas.index', compact('data'));
+        return view('ruangan.index', compact('data'));
     }
 
     /**
@@ -30,7 +31,8 @@ class FakultasController extends Controller
      */
     public function create()
     {
-        return view('fakultas.create');
+        $lists = Jurusan::select('id', 'name')->get();
+        return view('ruangan.create', compact('lists'));
     }
 
     /**
@@ -41,9 +43,9 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
-        Fakultas::create(['name' => $request->name]);
+        Ruangan::create(['jurusan_id' => $request->jurusan_id, 'name' => $request->name]);
 
-        return redirect()->route('fakultas.index');
+        return redirect()->route('ruangan.index');
     }
 
     /**
@@ -65,9 +67,10 @@ class FakultasController extends Controller
      */
     public function edit($id)
     {
-        $data = Fakultas::find($id);
+        $data = Ruangan::find($id);
+        $lists = Jurusan::select('id', 'name')->get();
 
-        return view('fakultas.edit', compact('data'));
+        return view('ruangan.edit', compact('data', 'lists'));
     }
 
     /**
@@ -79,9 +82,9 @@ class FakultasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Fakultas::whereId($id)->update(['name' => $request->name]);
+        Ruangan::whereId($id)->update(['jurusan_id' => $request->jurusan_id, 'name' => $request->name]);
 
-        return redirect()->route('fakultas.index');
+        return redirect()->route('ruangan.index');
     }
 
     /**
@@ -92,8 +95,8 @@ class FakultasController extends Controller
      */
     public function delete($id)
     {
-        Fakultas::whereId($id)->delete();
+        Ruangan::whereId($id)->delete();
 
-        return redirect()->route('fakultas.index');
+        return redirect()->route('ruangan.index');
     }
 }

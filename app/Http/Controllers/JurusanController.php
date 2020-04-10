@@ -18,7 +18,7 @@ class JurusanController extends Controller
         //pagination
         // numbering
         $data = Jurusan::when($request->search, function ($query) use ($request) {
-            $query->where(fakultas()->name, 'LIKE', '%' . $request->search);
+            $query->where('name', 'LIKE', '%' . $request->search . '%');
         })->paginate(5);
         // $data = Jurusan::where('$fakultas.name', '>', 100)->paginate(10);
 

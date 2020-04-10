@@ -34,16 +34,14 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Name</th>
-                  <th scope="col">ID</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-               @forelse($data as $key => $fakultas)
+               @forelse($data as $index => $fakultas)
                 <tr>
-                  <td>{{ $data->firstitem() + $key }}</td>
+                  <td>{{ $index +1 }}</td>
                   <td>{{ $fakultas->name }}</td>
-                  <td>{{ $fakultas->id }}</td>
                   <td>
                     <a href="{{ route('fakultas.edit', ['id' => $fakultas->id]) }}">
                       <button type="button" class="btn btn-sm btn-info">Edit</button>
@@ -62,7 +60,7 @@
                 @endforelse
               </tbody>
             </table>
-            {{ $data->links() }}
+             {{  $data->links() }}
           </div>
           <div class="card-footer text-right">
             <nav class="d-inline-block">
@@ -72,5 +70,6 @@
         </div>
       </div>  
   </div>
+
 </section>
 @endsection()
