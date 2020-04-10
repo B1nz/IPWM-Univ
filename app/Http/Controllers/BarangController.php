@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Fakultas;
+use App\Barang;
+use App\Ruangan;
 
-class FakultasController extends Controller
+class BarangController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +17,11 @@ class FakultasController extends Controller
     {
         //pagination
         // numbering
-        $data = Fakultas::when($request->search, function ($query) use ($request) {
+        $data = Barang::when($request->search, function ($query) use ($request) {
             $query->where('name', 'LIKE', '%' . $request->search . '%');
         })->paginate(5);
 
-        return view('fakultas.index', compact('data'));
+        return view('barang.index', compact('data'));
     }
 
     /**
@@ -30,7 +31,8 @@ class FakultasController extends Controller
      */
     public function create()
     {
-        return view('fakultas.create');
+        $lists = Ruangan::select('id', 'name')->get();
+        return view('barang.create', compact('lists'));
     }
 
     /**
@@ -41,9 +43,17 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
-        Fakultas::create(['name' => $request->name]);
+        $request->validate([
+            'name' => 'required',
+            'ruangan_id' => 'required',
+            'total' => 'required',
+            'broken' => 'required',
+        ]);
 
-        return redirect()->route('fakultas.index');
+        Barang::create(['ruangan_id' => $request->ruangan_id, 'name' => $request->name, 'total' => $request->total,
+            'broken' => $request->broken, 'created_by' => $request->created_by, 'updated_by' => $request->updated_by]);
+
+        return redirect()->route('barang.index');
     }
 
     /**
@@ -65,9 +75,10 @@ class FakultasController extends Controller
      */
     public function edit($id)
     {
-        $data = Fakultas::find($id);
+        $data = Barang::find($id);
+        $lists = Ruangan::select('id', 'name')->get();
 
-        return view('fakultas.edit', compact('data'));
+        return view('barang.edit', compact('data', 'lists'));
     }
 
     /**
@@ -79,9 +90,10 @@ class FakultasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Fakultas::whereId($id)->update(['name' => $request->name]);
+        Barang::whereId($id)->update(['ruangan_id' => $request->ruangan_id, 'name' => $request->name, 'total' => $request->total, 
+        'broken' => $request->broken, 'created_by' => $request->created_by, 'updated_by' => $request->updated_by]);
 
-        return redirect()->route('fakultas.index');
+        return redirect()->route('barang.index');
     }
 
     /**
@@ -92,8 +104,8 @@ class FakultasController extends Controller
      */
     public function delete($id)
     {
-        Fakultas::whereId($id)->delete();
+        Barang::whereId($id)->delete();
 
-        return redirect()->route('fakultas.index');
+        return redirect()->route('barang.index');
     }
 }
