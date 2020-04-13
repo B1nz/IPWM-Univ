@@ -27,6 +27,9 @@
             <a href="{{ route('barang.create') }}">
               <button type="button" class="btn btn-primary">Add New</button>
             </a>
+            <a href="{{ route('barang.export') }}">
+              <button type="button" class="btn btn-success">Export Data</button>
+            </a>
           </div>
           <div class="card-body">
             <table class="table table-bordered">

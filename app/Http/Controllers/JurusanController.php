@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\JurusanExport;
 use App\Fakultas;
 use Illuminate\Http\Request;
 use App\Jurusan;
+
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
 
 class JurusanController extends Controller
 {
@@ -104,5 +108,10 @@ class JurusanController extends Controller
         Jurusan::whereId($id)->delete();
 
         return redirect()->route('jurusan.index');
+    }
+
+    public function export(Request $request) 
+    {
+        return Excel::download(new JurusanExport, 'jurusan-'.date("Y-m-d").'.xlsx');
     }
 }

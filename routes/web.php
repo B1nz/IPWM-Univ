@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('barang/edit/{id}', ['as' => 'barang.edit', 'uses' => 'BarangController@edit']);
         Route::put('barang/edit/{id}', ['as' => 'barang.update', 'uses' => 'BarangController@update']);
         Route::get('barang/delete/{id}', ['as' => 'barang.delete', 'uses' => 'BarangController@delete']);
+        Route::get('barang/export', ['as' => 'barang.export', 'uses' => 'BarangController@export']);
 
         Route::get('jurusan', ['as' => 'jurusan.index', 'uses' => 'JurusanController@index']);
         Route::get('jurusan/create', ['as' => 'jurusan.create', 'uses' => 'JurusanController@create']);
@@ -45,6 +46,7 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('jurusan/edit/{id}', ['as' => 'jurusan.edit', 'uses' => 'JurusanController@edit']);
         Route::put('jurusan/edit/{id}', ['as' => 'jurusan.update', 'uses' => 'JurusanController@update']);
         Route::get('jurusan/delete/{id}', ['as' => 'jurusan.delete', 'uses' => 'JurusanController@delete']);
+        Route::get('jurusan/export', ['as' => 'jurusan.export', 'uses' => 'JurusanController@export']);
     });
 
     Route::get('staffbarang', ['as' => 'staffbarang.index', 'uses' => 'StaffBarangController@index']);
