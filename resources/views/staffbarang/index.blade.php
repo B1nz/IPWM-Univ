@@ -32,6 +32,7 @@
                   <th scope="col">Ruangan</th>
                   <th scope="col">Total</th>
                   <th scope="col">Rusak</th>
+                  <td scope="col">Foto</td>
                   <th scope="col">Created By</th>
                   <th scope="col">Updated By</th>
                   <th scope="col">Action</th>
@@ -45,6 +46,7 @@
                   <td>{{ $barang->ruangan->name }}</td>
                   <td>{{ $barang->total }}</td>
                   <td>{{ $barang->broken }}</td>
+                  <td><img width="100px" src="{{ url('/foto_barang/'.$barang->foto) }}"></td>
                   <td>{{ $barang->created_by }}</td>
                   <td>{{ $barang->updated_by }}</td>
                   <td>

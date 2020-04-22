@@ -49,8 +49,8 @@ class JurusanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'fakultas_id' => 'required',
+            'name' => 'required | max:255',
+            'fakultas_id' => 'required | numeric',
         ]);
 
         Jurusan::create(['fakultas_id' => $request->fakultas_id, 'name' => $request->name]);
