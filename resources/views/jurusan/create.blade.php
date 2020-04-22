@@ -11,7 +11,7 @@
     <div class="col-12 col-md-6 col-lg-6">
         <div class="card">
           <div class="card-header">
-            <a href="{{ route('fakultas.index') }}"> 
+            <a href="{{ route('jurusan.index') }}"> 
               <button type="button" class="btn btn-outline-info">
                 <i class="fas fa-arrow-circle-left"></i> Back
               </button>
@@ -20,6 +20,17 @@
           <div class="card-body">
             <form action="{{ route('jurusan.store') }}" method="POST" enctype="multipart/form-data">
               @csrf
+
+              @if ($errors->any())
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+              @endif    
+               
               <div class="form-group">
                 <label>Name</label>
                 <input type="text" name="name" class="form-control">

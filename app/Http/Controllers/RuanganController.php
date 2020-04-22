@@ -43,6 +43,11 @@ class RuanganController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required | max:255',
+            'jurusan_id' => 'required | numeric',
+        ]);
+
         Ruangan::create(['jurusan_id' => $request->jurusan_id, 'name' => $request->name]);
 
         return redirect()->route('ruangan.index');
@@ -82,6 +87,11 @@ class RuanganController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required | max:255',
+            'jurusan_id' => 'required | numeric',
+        ]);
+        
         Ruangan::whereId($id)->update(['jurusan_id' => $request->jurusan_id, 'name' => $request->name]);
 
         return redirect()->route('ruangan.index');

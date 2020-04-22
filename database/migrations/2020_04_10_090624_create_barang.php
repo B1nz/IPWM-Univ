@@ -19,6 +19,7 @@ class CreateBarang extends Migration
             $table->string('name', 50);
             $table->integer('total');
             $table->integer('broken');
+            $table->string('foto', 255);
             $table->string('created_by', 255)->index();
             $table->string('updated_by', 255)->index();
             $table->timestamps();

@@ -41,6 +41,10 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required | max:255',
+        ]);
+
         Fakultas::create(['name' => $request->name]);
 
         return redirect()->route('fakultas.index');
@@ -79,6 +83,10 @@ class FakultasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required | max:255',
+        ]);
+
         Fakultas::whereId($id)->update(['name' => $request->name]);
 
         return redirect()->route('fakultas.index');

@@ -23,6 +23,17 @@
             <form action="{{ route('staffbarang.update', ['id' => $data->id]) }}" method="POST" enctype="multipart/form-data">
               <input type="hidden" name="_method" value="PUT">
               @csrf
+
+              @if ($errors->any())
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+              @endif    
+               
               <div class="form-group">
                 <label>Name</label>
                 <input type="text" name="name" class="form-control" value="{{ $data->name }}">
@@ -42,6 +53,10 @@
               <div class="form-group">
                 <label>Rusak</label>
                 <input type="number" name="broken" class="form-control" value="{{ $data->broken }}">
+              </div>
+              <div class="form-group">
+                <b>File Gambar</b><br/>
+                <input type="file" name="foto" class="form-control" value="{{ $data->foto }}">
               </div>
               <div class="form-group">
                 <input type="text" name="created_by" class="form-control" value="{{ $data->created_by }}" readonly hidden>

@@ -20,6 +20,17 @@
           <div class="card-body">
             <form action="{{ route('barang.store') }}" method="POST" enctype="multipart/form-data">
               @csrf
+
+              @if ($errors->any())
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+              @endif    
+                      
               <div class="form-group">
                 <label>Name</label>
                 <input type="text" name="name" class="form-control">
@@ -39,6 +50,10 @@
               <div class="form-group">
                 <label>Rusak</label>
                 <input type="number" name="broken" class="form-control">
+              </div>
+              <div class="form-group">
+                <b>File Gambar</b><br/>
+                <input type="file" name="foto" class="form-control">
               </div>
               <div class="form-group">
                 <input type="text" name="created_by" class="form-control" value=" {{ auth()->user()->name }} " readonly hidden>
