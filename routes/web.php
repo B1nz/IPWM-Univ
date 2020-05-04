@@ -56,8 +56,9 @@ Route::group(['middleware' => 'auth'], function(){
 
 });
 
+Route::get('/sendemail', 'EmailController@send');
 Route::get('dashboard', function () {
-	return view('dashboard.index');
+    return view('dashboard.index');
 })->name('dashboard');
 
 Route::get('/', function () {
