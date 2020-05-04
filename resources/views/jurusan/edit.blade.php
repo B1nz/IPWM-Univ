@@ -13,7 +13,7 @@
     <div class="col-12 col-md-6 col-lg-6">
         <div class="card">
           <div class="card-header">
-            <a href="{{ route('fakultas.index') }}"> 
+            <a href="{{ route('jurusan.index') }}"> 
               <button type="button" class="btn btn-outline-info">
                 <i class="fas fa-arrow-circle-left"></i> Back
               </button>
@@ -23,6 +23,17 @@
             <form action="{{ route('jurusan.update', ['id' => $data->id]) }}" method="POST" enctype="multipart/form-data">
               <input type="hidden" name="_method" value="PUT">
               @csrf
+
+              @if ($errors->any())
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach ($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+              @endif    
+               
               <div class="form-group">
                 <label>Name</label>
                 <input type="text" name="name" class="form-control" value="{{ $data->name }}">

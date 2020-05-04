@@ -41,13 +41,20 @@ class StaffBarangController extends Controller
         $request->validate([
             'name' => 'required',
             'ruangan_id' => 'required',
-            'total' => 'required',
-            'broken' => 'required',
+            'total' => 'required | numeric',
+            'broken' => 'required | numeric',
         ]);
+
+        $file = $request->file('foto');
+
+        $nama_file = time() . "_" . $file->getClientOriginalName();
+
+        $tujuan_upload = 'foto_barang';
+        $file->move($tujuan_upload, $nama_file);
 
         Barang::create([
             'ruangan_id' => $request->ruangan_id, 'name' => $request->name, 'total' => $request->total,
-            'broken' => $request->broken, 'created_by' => $request->created_by, 'updated_by' => $request->updated_by
+            'broken' => $request->broken, 'foto' => $nama_file, 'created_by' => $request->created_by, 'updated_by' => $request->updated_by
         ]);
 
         return redirect()->route('staffbarang.index');
@@ -87,9 +94,23 @@ class StaffBarangController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'ruangan_id' => 'required',
+            'total' => 'required | numeric',
+            'broken' => 'required | numeric',
+        ]);
+
+        $file = $request->file('foto');
+
+        $nama_file = time() . "_" . $file->getClientOriginalName();
+
+        $tujuan_upload = 'foto_barang';
+        $file->move($tujuan_upload, $nama_file);
+
         Barang::whereId($id)->update([
             'ruangan_id' => $request->ruangan_id, 'name' => $request->name, 'total' => $request->total,
-            'broken' => $request->broken, 'created_by' => $request->created_by, 'updated_by' => $request->updated_by
+            'broken' => $request->broken, 'foto' => $nama_file, 'created_by' => $request->created_by, 'updated_by' => $request->updated_by
         ]);
 
         return redirect()->route('staffbarang.index');

@@ -56,14 +56,9 @@ Route::group(['middleware' => 'auth'], function(){
 
 });
 
-<<<<<<< Updated upstream
-Route::get('/dashboard', function () {
-=======
 Route::get('/sendemail', 'EmailController@send');
-
 Route::get('dashboard', function () {
->>>>>>> Stashed changes
-	return view('dashboard.index');
+    return view('dashboard.index');
 })->name('dashboard');
 
 Route::get('/', function () {
