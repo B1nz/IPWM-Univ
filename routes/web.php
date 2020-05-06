@@ -24,6 +24,7 @@ Route::group(['middleware' => 'auth'], function(){
 		Route::get('fakultas/edit/{id}', ['as' => 'fakultas.edit', 'uses' => 'FakultasController@edit']);
 		Route::put('fakultas/edit/{id}', ['as' => 'fakultas.update', 'uses' => 'FakultasController@update']);
         Route::get('fakultas/delete/{id}', ['as' => 'fakultas.delete', 'uses' => 'FakultasController@delete']);
+        Route::post('fakultas/import', ['as' => 'fakultas.import', 'uses' => 'FakultasController@import']);
 
         Route::get('ruangan', ['as' => 'ruangan.index', 'uses' => 'RuanganController@index']);
         Route::get('ruangan/create', ['as' => 'ruangan.create', 'uses' => 'RuanganController@create']);
