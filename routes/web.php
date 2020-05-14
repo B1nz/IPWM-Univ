@@ -58,10 +58,7 @@ Route::group(['middleware' => 'auth'], function(){
 });
 
 Route::get('/sendemail', 'EmailController@send');
-Route::get('dashboard', function () {
-    return view('dashboard.index');
-})->name('dashboard');
 
-Route::get('/', function () {
-    return view('staffbarang.index');
-});
+Route::get('/', ['as' => 'auth.signout', 'uses' => 'Auth\loginController@signout']);
+
+Route::get('/dashboard', ['as' => 'dashboard.index', 'uses' => 'DashboardController@index']);

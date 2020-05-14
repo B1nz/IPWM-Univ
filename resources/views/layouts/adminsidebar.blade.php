@@ -8,7 +8,7 @@
           </div>
           <ul class="sidebar-menu">
               <li class="">
-                <a class="nav-link" href="{{ route('dashboard') }}"><i class="far fa-square"></i> <span>Dashboard</span></a>
+                <a class="nav-link" href="{{ route('dashboard.index') }}"><i class="far fa-square"></i> <span>Dashboard</span></a>
               </li>
               @if(auth()->user()->role == 'admin')
                 <li class="">
