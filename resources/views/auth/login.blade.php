@@ -50,6 +50,9 @@
                 </button>
               </div>
             </form>
+            <a href="register">
+              <button type="submit" class="btn btn-light btn-lg btn-icon icon-right" tabindex="4">Register</button>
+            </a>
 
             <div class="text-center mt-5 text-small">
               Copyright &copy; {{ date('Y') }}

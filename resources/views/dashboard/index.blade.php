@@ -72,7 +72,10 @@
     <div class="col-sm-6">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Barang</h5>
+            <h3 class="card-title">Barang</h3>
+            <p class="card-text">
+              <h5>Jumlah Barang : {{$barang}}</h5>
+            </p>
             <p class="card-text">Manage what Stuff is available at each Room.</p>
             <a href="{{ route('staffbarang.index') }}" class="btn btn-primary">Start!</a>
           </div>
